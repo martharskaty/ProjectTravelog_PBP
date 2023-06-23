@@ -38,9 +38,6 @@ class SignInFragment : Fragment() {
         binding.btnLogin.setOnClickListener {
             findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
         }
-        binding.forgotPass.setOnClickListener {
-            findNavController().navigate(R.id.action_signInFragment_to_forgotPasswordFragment)
-        }
         binding.btnLogin.setOnClickListener {
             val email = binding.txtUsername.text.toString()
             val password = binding.txtPass.text.toString()

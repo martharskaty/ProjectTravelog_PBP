@@ -9,17 +9,19 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.projecttravelog_pbp.R
 import com.example.projecttravelog_pbp.databinding.FragmentSplashBinding
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 class SplashFragment : Fragment() {
-    lateinit var binding:FragmentSplashBinding
+    lateinit var binding: FragmentSplashBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentSplashBinding.inflate(inflater,container,false)
+        binding = FragmentSplashBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -27,9 +29,12 @@ class SplashFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         Handler().postDelayed({
-            findNavController().navigate(R.id.action_splashFragment_to_welcomeFragment)
-
-        },3000)
+            if (Firebase.auth.currentUser != null) {
+                findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+            } else {
+                findNavController().navigate(R.id.action_splashFragment_to_welcomeFragment)
+            }
+        }, 3000)
     }
 
 
